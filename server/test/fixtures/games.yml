@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  answer: MyString
+  difficulty: 1
+  win: false
+  user_id: 1
+
+two:
+  answer: MyString
+  difficulty: 1
+  win: false
+  user_id: 1
