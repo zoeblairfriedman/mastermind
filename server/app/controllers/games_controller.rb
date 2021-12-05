@@ -1,6 +1,7 @@
 class GamesController < ApplicationController
 
   # def new
+  #   binding.pry
   #   @game = Game.new
   #   # set_list
   # end
