@@ -5,7 +5,7 @@ export default function Login() {
     <form>
       <label>
         username:
-    <input type="text" name="username" />
+     <input type="text" name="username" />
       </label>
       <label>
         password:

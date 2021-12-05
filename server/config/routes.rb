@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   # get '/login', to: "sessions#new", as: "login"
   post '/login', to: "sessions#create"
   get "/logout", to: "sessions#destroy"
+  get '/logged_in', to: 'sessions#is_logged_in?'
 end
