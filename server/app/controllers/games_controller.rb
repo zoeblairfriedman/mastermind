@@ -7,7 +7,7 @@ class GamesController < ApplicationController
 
 def create
     binding.pry
-    @game = Game.new(game_params)
+    game = Game.new(game_params)
     # if !current_musician.bands.include?(@gig.band)
     #     current_musician.bands << @gig.band
     # end
@@ -22,14 +22,20 @@ def create
 end
 
 
-def show
-    # @gig_songs = @gig.gig_songs
-end
+# def show
+#     # @gig_songs = @gig.gig_songs
+# end
+
+# def index
+#     # @musician = Musician.find_by(id: params[:musician_id])
+#     # @gigs = @musician.gigs
+#     # @gigs = @musician.gigs.by_date.not_over
+# end
+
+
 
 def index
-    # @musician = Musician.find_by(id: params[:musician_id])
-    # @gigs = @musician.gigs
-    # @gigs = @musician.gigs.by_date.not_over
+  render json: Game.all
 end
 
 
