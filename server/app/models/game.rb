@@ -1,4 +1,17 @@
 class Game < ApplicationRecord
-  belongs_to :user 
-  
+
+  # def turn=()
+  #   @turn = 0
+  # end
+
+  # def turn
+  #   @turn
+  # end
+  def initialize(turns)
+    @turns = turns
+  end
+
+  def turns
+    @turns
+  end
 end

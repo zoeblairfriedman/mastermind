@@ -1,3 +1,5 @@
+require 'pry'
+
 class GamesController < ApplicationController
 
   # def new
@@ -7,19 +9,11 @@ class GamesController < ApplicationController
   # end
 
 def create
-    binding.pry
-    game = Game.new(game_params)
-    # if !current_musician.bands.include?(@gig.band)
-    #     current_musician.bands << @gig.band
-    # end
-    # if @gig.save
-    #     flash[:message] = "Rock. Gig Saved!" 
-    #     redirect_to gig_path(@gig)
-    # else
-    #     set_list
-    #     render :new
-    # end
-    binding.pry
+    game = Game.new(10)
+    render json: {
+        message: "Ready to play? You will have #{game.turns} turns."
+      }
+
 end
 
 
@@ -43,9 +37,9 @@ end
 private 
 
 
-def game_params
-    binding.pry
-    params.require(:game).permit(:difficulty, :user_id)
-end
+# def game_params
+#     binding.pry
+#     params.require(:game).permit(:difficulty, :user_id)
+# end
 
 end
