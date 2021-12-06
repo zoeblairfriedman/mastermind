@@ -9,11 +9,13 @@ class GamesController < ApplicationController
   # end
 
 def create
-    game = Game.new(10)
+    game = Game.new()
+    game.difficulty = 10;
+    game.save
     render json: {
-        message: "Ready to play? You will have #{game.turns} turns."
+        message: "Ready to play? You will have #{game.difficulty} turns."
       }
-
+    game.startGame
 end
 
 
