@@ -2,37 +2,24 @@ require 'pry'
 
 class GamesController < ApplicationController
 
-  # def new
-  #   binding.pry
-  #   @game = Game.new
-  #   # set_list
-  # end
-
 def create
     game = Game.new()
     game.difficulty = 10;
+    game.answer = game.setAnswer
     game.save
     render json: {
-        message: "Ready to play? You will have #{game.difficulty} turns."
+        message: "Ready to play? You will have #{game.difficulty} turns.",
+        game: game.id
       }
-    game.startGame
+    # next steps!!
+    
 end
 
 
-# def show
-#     # @gig_songs = @gig.gig_songs
-# end
-
-# def index
-#     # @musician = Musician.find_by(id: params[:musician_id])
-#     # @gigs = @musician.gigs
-#     # @gigs = @musician.gigs.by_date.not_over
-# end
-
-
-
-def index
-  render json: Game.all
+def show
+  binding.pry
+    game = Game.find_by(id: params[:id])
+    # https://stackoverflow.com/questions/7316656/how-to-get-a-query-string-from-a-url-in-rails
 end
 
 
