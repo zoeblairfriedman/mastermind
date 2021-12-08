@@ -26,16 +26,10 @@ class Game < ApplicationRecord
     game.save
   end
 
-  def handle_incorrect(guess, game)
+  def handle_incorrect(game)
     game.difficulty -= 1
     game.save
-    # correct_arr = get_correct_arr(guess, game.answer)
-    correct_arr = [1, 3]
-    return correct_arr
   end
 
-  def get_correct_arr(guess, answer)
-    #this will return an array of indexes that match
-  end
   
 end

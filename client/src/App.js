@@ -1,6 +1,6 @@
 
 import Newgame from './Newgame'
-import Game from './Game'
+import GameContainer from './GameContainer'
 import React, { useState } from 'react';
 
 export default function App() {
@@ -17,7 +17,7 @@ export default function App() {
 
   return (
     <>
-      {game ? <Game data={response.data} /> : <Newgame handleStart={handleStart} />}
+     {game ? <GameContainer data={response.data} /> : <Newgame handleStart={handleStart} />}
     </>
   )
 

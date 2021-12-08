@@ -11,3 +11,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.incorrect {
+  color: blue;
+}
+
+.correct {
+  color: green;
+}
+
+#guesses {
+  display: flex;
+}

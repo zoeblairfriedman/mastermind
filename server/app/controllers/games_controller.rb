@@ -12,8 +12,6 @@ def create
         message: "Ready to play? You will have #{game.difficulty} turns.",
         game: game.id
       }
-    # next steps!!
-    
 end
 
 
@@ -23,15 +21,25 @@ def show
     if params[:guess] && game.check_guess(guess, game)
       game.handle_correct(game)
       render json: {
-        message: "You have submited a correct answer!"
+        message: "You have submited a correct answer!",
+        answer: guess,
+        turns: game.difficulty,
+        won: true
       }
-    elsif params[:guess] && !game.check_guess(guess, game)
-      correct = game.handle_incorrect(guess, game)
+    elsif params[:guess] && !game.check_guess(guess, game) && game.difficulty != 1
+      game.handle_incorrect(game)
+      puts game.answer
       render json: {
         message: "Your guess was incorrect",
-        correct: correct,
         turns: game.difficulty
-      }
+      } 
+    else 
+        puts "YOU LOST"
+        render json: {
+          message: "YOU LOST",
+          turns: game.difficulty,
+          won: false
+        }
     end
 end
 
