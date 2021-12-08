@@ -16,14 +16,13 @@ end
 
 
 def show
+  # need an async function to make the messages display properly
     game = Game.find_by(id: params[:id])
     guess = params[:guess]
     if params[:guess] && game.check_guess(guess, game)
       game.handle_result(game, true)
       render json: {
-        message: "You have submited a correct answer!",
-        answer: guess,
-        turns: game.difficulty,
+        message: "VICTORY! The answer was #{guess}! You guessed correctly with #{game.difficulty} turns to spare.",
         won: true
       }
     elsif params[:guess] && !game.check_guess(guess, game) && game.difficulty != 1
@@ -33,14 +32,11 @@ def show
         message: "Your guess was incorrect",
         turns: game.difficulty,
         answers: answer_hash
-        # correct: answer_hash["correct"],
-        # incorrect: answer_hash["incorrect"]
       } 
     else 
         game.handle_result(game, false)
         render json: {
-          message: "YOU LOST",
-          turns: game.difficulty,
+          message: "YOU LOST. The answer was #{game.answer}",
           won: false
         }
     end
