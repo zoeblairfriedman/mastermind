@@ -48,5 +48,18 @@ class Game < ApplicationRecord
     game.win = result
     game.save
   end
+
+  def get_message(turns, answer_hash)
+    message = ""
+    num_correct = answer_hash["correct"].length
+    if (num_correct === 0)
+      message << "Not even close. " 
+    else
+      message << "Getting warmer, you got #{num_correct} right. "
+    end
+    message << "You have #{turns} turns left."
+    return message
+  end
+
   
 end
