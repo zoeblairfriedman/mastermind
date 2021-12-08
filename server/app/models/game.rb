@@ -2,9 +2,11 @@ require 'httparty'
 require 'pry'
 
 class Game < ApplicationRecord
+  has_many :guesses
 
   API_url = "https://www.random.org/integers/?num=4&min=0&max=7&col=1&base=10&format=plain&rnd=new"
 
+  
   def set_answer
     number = HTTParty.get(API_url).parsed_response
     num_string = number.split(/\n+/).join()

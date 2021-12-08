@@ -17,15 +17,15 @@ end
 
 def show
     game = Game.find_by(id: params[:id])
-    guess = params[:guess]
-    if params[:guess] && game.check_guess(guess, game)
+    guess = Guess.create(input: params[:guess], game_id: game.id)
+    if params[:guess] && game.check_guess(guess.input, game)
       game.handle_result(game, true)
       render json: {
-        message: "VICTORY! The answer was #{guess}! You guessed correctly with #{game.difficulty - 1} turn(s) to spare.",
+        message: "VICTORY! The answer was #{guess.input}! You guessed correctly with #{game.difficulty - 1} turn(s) to spare.",
         won: true
       }
-    elsif params[:guess] && !game.check_guess(guess, game) && game.difficulty != 1
-      answer_hash = game.handle_incorrect(game, guess)
+    elsif params[:guess] && !game.check_guess(guess.input, game) && game.difficulty != 1
+      answer_hash = game.handle_incorrect(game, guess.input)
       message = game.get_message(game.difficulty, answer_hash)
       puts game.answer
       render json: {
