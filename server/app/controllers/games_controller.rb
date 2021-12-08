@@ -19,7 +19,7 @@ def show
     game = Game.find_by(id: params[:id])
     guess = params[:guess]
     if params[:guess] && game.check_guess(guess, game)
-      game.handle_correct(game)
+      game.handle_result(game, true)
       render json: {
         message: "You have submited a correct answer!",
         answer: guess,
@@ -27,14 +27,17 @@ def show
         won: true
       }
     elsif params[:guess] && !game.check_guess(guess, game) && game.difficulty != 1
-      game.handle_incorrect(game)
+      answer_hash = game.handle_incorrect(game, guess)
       puts game.answer
       render json: {
         message: "Your guess was incorrect",
-        turns: game.difficulty
+        turns: game.difficulty,
+        answers: answer_hash
+        # correct: answer_hash["correct"],
+        # incorrect: answer_hash["incorrect"]
       } 
     else 
-        puts "YOU LOST"
+        game.handle_result(game, false)
         render json: {
           message: "YOU LOST",
           turns: game.difficulty,
@@ -43,13 +46,5 @@ def show
     end
 end
 
-
-private 
-
-
-# def game_params
-#     binding.pry
-#     params.require(:game).permit(:difficulty, :user_id)
-# end
 
 end
