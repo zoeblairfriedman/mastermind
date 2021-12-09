@@ -24,8 +24,7 @@ class Game < ApplicationRecord
   end
 
   def handle_incorrect(game, guess)
-    game.difficulty -= 1
-    game.save
+    game.update(difficulty: game.difficulty-=1)
     answer_arr = game.answer.split("")
     guess_arr = guess.split("")
     correct = get_correct(guess_arr, answer_arr)
@@ -47,8 +46,7 @@ class Game < ApplicationRecord
   end
 
   def handle_result(game, result)
-    game.win = result
-    game.save
+    game.update(win: result)
   end
 
   def get_message(turns, answer_hash)

@@ -1,7 +1,6 @@
 require 'pry'
 
 class GamesController < ApplicationController
-  #change difficulty to turns in the db
 
 def create
     game = Game.new()
@@ -27,11 +26,13 @@ def show
     elsif params[:guess] && !game.check_guess(guess.input, game) && game.difficulty != 1
       answer_hash = game.handle_incorrect(game, guess.input)
       message = game.get_message(game.difficulty, answer_hash)
+      guesses = guess.get_guess_arr()
       puts game.answer
       render json: {
         message: message,
         turns: game.difficulty,
-        answers: answer_hash
+        answers: answer_hash,
+        guesses: guesses
       } 
     else 
         game.handle_result(game, false)
